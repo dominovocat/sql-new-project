@@ -1,15 +1,42 @@
-const { getUserById, getUserList } = require("../services/user.service");
+const {
+  getUserById,
+  getUserList,
+  createUser,
+  updateUserById,
+  deleteUserById,
+} = require("../services/user.service");
 
 class UserController {
-  createUser = async () => {};
+  createUser = async (req, res, next) => {
+    try {
+      const data = req.body;
 
-  updateUser = async () => {};
+      const createdUser = await createUser(data);
 
-  deleteUser = async () => {};
+      res.status(200).send({ data: createdUser });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateUser = async (req, res, next) => {
+    const data = req.body;
+    const id = req.params.id;
+
+    const updatedUser = await updateUserById(id, data);
+
+    res.status(200).send({ data: updatedUser });
+  };
+
+  deleteUser = async (req, res, next) => {
+    const id = req.params.id;
+
+    const deletedUser = await deleteUserById(id);
+
+    res.status(200).send({ data: deletedUser });
+  };
 
   getById = async (req, res, next) => {
-    console.log(req.params.id);
-
     const id = Number(req.params.id);
 
     const foundUser = await getUserById(id);
@@ -21,9 +48,11 @@ class UserController {
     // ?page=1&limit=10
     const page = req.query.page || 1;
     const limit = req.query.limit || 10;
+
     const userList = await getUserList(limit, page);
 
     res.status(200).send({ data: userList });
   };
 }
+
 module.exports = new UserController();

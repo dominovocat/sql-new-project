@@ -1,6 +1,12 @@
 "use strict";
 const { Model } = require("sequelize");
 
+/* 
+  allowNull: false - NOT NULL,
+  unique: true - UNIQUE
+  defaultValue: 'value' - DEFAULT 'value'
+*/
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -33,10 +39,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
         validate: {
-          len: [3, 32],
+          len: [7, 32],
         },
       },
-      ismale: {
+      isMale: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
@@ -63,6 +69,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      tableName: "users",
     }
   );
   return User;
