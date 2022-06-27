@@ -42,6 +42,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [7, 32],
         },
       },
+      password:{
+        type:DataTypes.TEXT,
+        allowNull:false,
+        unique:true,
+        validate:{
+          len:[7,32],
+        },
+      },
       isMale: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
