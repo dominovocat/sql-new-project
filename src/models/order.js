@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     static associate(models) {
       // define association here
-      Order.belongsTo(models.User);
+      Order.belongsTo(models.User,{foreignKey:'user_id'});
     }
   }
   Order.init(
