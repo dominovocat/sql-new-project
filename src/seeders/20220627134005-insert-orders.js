@@ -8,7 +8,7 @@ module.exports = {
         {
           id:1,
           address:"New York",
-          phone:"41152314212",
+          phones:"41152314212",
           status:"prepared",
           user_id:1,
           createdAt:new Date().toISOString(),
@@ -17,7 +17,7 @@ module.exports = {
         {
           id:2,
           address:"California",
-          phone:"41152314212",
+          phones:"41152314212",
           status:"prepared",
           user_id:1,
           createdAt:new Date().toISOString(),
