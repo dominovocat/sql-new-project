@@ -7,23 +7,24 @@ module.exports = {
       [
         {
           id:1,
-          adress:"New York",
-          phone:"412345678912",
+          address:"New York",
+          phone:"41152314212",
           status:"prepared",
           user_id:1,
           createdAt:new Date().toISOString(),
-          updateAT:new Date().toISOString(),
+          updatedAt:new Date().toISOString(),
         },
         {
           id:2,
-          adress:"California",
-          phone:"412345645912",
+          address:"California",
+          phone:"41152314212",
           status:"prepared",
           user_id:1,
-          createdAt:new Date.toISOString(),
-          updateAT:new Date.toISOString(),
+          createdAt:new Date().toISOString(),
+          updatedAt:new Date().toISOString(),
         },
-      ]
+      ],
+      {}
     )
   },
 

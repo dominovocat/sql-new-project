@@ -3,10 +3,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("orders", {
       id: {
+        type:Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
       address: {
         type: Sequelize.STRING,
@@ -15,6 +15,11 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+
+        references:{
+          key:'id',
+          model:'users',
+        }
       },
       phones: {
         type: Sequelize.STRING,
@@ -38,6 +43,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+    });
+
+    await queryInterface.addConstraint('orders', {
+      type: 'CHECK',
+      fields: ['phone'],
+      where: {
+        phone: {
+          [Sequelize.Op.regexp]: '^[0-9]{11,11}$',
+        }
+      }
     });
   },
   async down(queryInterface, Sequelize) {
