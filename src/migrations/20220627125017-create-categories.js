@@ -1,32 +1,17 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('products', {
+    await queryInterface.createTable('categories', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING(32),
-        allowNull:false,
-      },
-      brand: {
-        type: Sequelize.STRING(32),
-        allowNull:false,
-      },
       categories: {
-        type: Sequelize.STRING(32),
+        type: Sequelize.STRING,
         allowNull:false,
-      },
-      price: {
-        type: Sequelize.DECIMAL(10,2),
-        allowNull:false,
-      },
-      amount: {
-        type: Sequelize.DECIMAL(10,2),
-        allowNull:false,
+        unique:true,
       },
       createdAt: {
         allowNull: false,
@@ -38,8 +23,16 @@ module.exports = {
       }
     });
 
+    await queryInterface.addConstraint('products',{
+      type:'FOREIGN KEY',
+      filds:['Categories'],
+      references:{
+        field:'name',
+        table:'categories',
+      },
+    });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('products');
+    await queryInterface.dropTable('categories');
   }
 };
