@@ -1,6 +1,6 @@
 'use strict';
 
-const { query } = require("express");
+
 
 module.exports = {
   async up (queryInterface, Sequelize) {
