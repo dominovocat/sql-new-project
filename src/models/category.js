@@ -3,14 +3,14 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Categories extends Model {
+  class Category extends Model {
 
     static associate(models) {
       // define association here
       Categories.belongsTo(models.categories);
     }
   }
-  Categories.init({
+  Category.init({
     name: {
       type:DataTypes.STRING,
       allowNull:false,
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Categories',
+    modelName: 'Category',
     tableName:'categories'
   });
-  return Categories;
+  return Category;
 };
