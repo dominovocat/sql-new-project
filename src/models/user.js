@@ -9,10 +9,9 @@ const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-
     static associate(models) {
       // define association here
-      User.hasMany(models.Order,{foreignKey:'user_id'});
+      User.hasMany(models.Order, { foreignKey: "user_id" });
     }
   }
   User.init(
@@ -39,12 +38,12 @@ module.exports = (sequelize, DataTypes) => {
           len: [7, 32],
         },
       },
-      password:{
-        type:DataTypes.TEXT,
-        allowNull:false,
-        unique:true,
-        validate:{
-          len:[7,32],
+      password: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        unique: true,
+        validate: {
+          len: [7, 32],
         },
       },
       isMale: {
