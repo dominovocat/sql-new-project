@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('categories', {
@@ -36,7 +34,7 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeConstraint('products','products_category_fkey');
+    await queryInterface.removeConstraint('products','products_categories_categories_fk');
     await queryInterface.dropTable('categories');
   }
 };

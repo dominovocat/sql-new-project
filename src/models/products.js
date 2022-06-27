@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      products.belongsTo(models.Category)
     }
   }
   products.init({
