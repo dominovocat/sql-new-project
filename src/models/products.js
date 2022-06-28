@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         through: models.ProductsToOrders,
         foreignKey: "product_id",
       });
+      products.belongsToMany(models.User,{
+        through:models.UsersToProducts,
+        foreignKey:"product_id",
+      })
     }
   }
   products.init(
