@@ -12,7 +12,12 @@ class UserService {
     const foundUsers = await User.findAll({
       limit: limit,
       offset: (page - 1) * limit,
-      include:Order, //Left outer join
+      include:[{
+        model:Order,
+        as:"orders",
+      },{
+        model:BankCard,as:'bankcard'
+      }] //Left outer join
     });
 
     return foundUsers;

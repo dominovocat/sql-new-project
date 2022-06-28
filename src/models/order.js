@@ -1,10 +1,20 @@
 "use strict";
 const { Model } = require("sequelize");
+// const { ProductsToOrders } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     static associate(models) {
       // define association here
-      Order.belongsTo(models.User,{foreignKey:'user_id'});
+      Order.belongsTo(models.User, {
+        foreignKey: "user_id",
+        targetKey: "id",
+        as: "order",
+      });
+
+      Order.belongsToMany(models.products, {
+        through: models.ProductsToOrders,
+        foreignKey: "order_id",
+      });
     }
   }
   Order.init(
