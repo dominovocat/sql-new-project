@@ -11,12 +11,16 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
-      User.hasMany(models.Order, { foreignKey: "user_id",targetKey:'id',as:'orders' });
-      User.hasOne(models.BankCard,{foreignKey:'userId',as:'bankcard'});
-      User.hasMany(models.products,{
-        through:models.UsersToProducts,
-        foreignKey:"user_id",
-      })
+      User.hasMany(models.Order, {
+        foreignKey: "user_id",
+        targetKey: "id",
+        as: "orders",
+      });
+      User.hasOne(models.BankCard, { foreignKey: "userId", as: "bankcard" });
+      User.hasMany(models.products, {
+        through: models.UsersToProducts,
+        foreignKey: "user_id",
+      });
     }
   }
   User.init(

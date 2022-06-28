@@ -39,8 +39,9 @@ module.exports = {
       type:'CHECK',
       fields:['amount'],
       where:{
+        amount:{
         [Sequelize.Op.gte]:0,
-      }
+      }}
     });
   },
   async down(queryInterface, Sequelize) {
