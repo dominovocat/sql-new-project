@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     unique:true,
     allowNull:false,
 
-    validate:{
-      isNumeric:true,
-    },
+    // validate:{
+    //   isNumeric:true,
+    // },
     userId:{
       type:DataTypes.INTEGER,
       allowNull:false,

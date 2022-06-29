@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "id",
         as: "orders",
       });
-      User.hasOne(models.BankCard, { foreignKey: "userId", as: "bankcard" });
-      User.hasMany(models.products, {
+      User.hasOne(models.BankCard, { foreignKey: "userId", as: "bankCard" });
+      User.hasMany(models.Products, {
         through: models.UsersToProducts,
         foreignKey: "user_id",
       });
@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [7, 32],
         },
       },
-      isMale: {
+      ismale: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },

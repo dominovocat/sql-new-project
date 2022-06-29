@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "order",
       });
 
-      Order.belongsToMany(models.products, {
+      Order.belongsToMany(models.Products, {
         through: models.ProductsToOrders,
         foreignKey: "order_id",
       });
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       status: {
-        type: Sequelize.ENUM(
+        type: DataTypes.ENUM(
           "prepared",
           "paid",
           "shipping",

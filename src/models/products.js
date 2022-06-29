@@ -2,24 +2,24 @@
 const { Model } = require("sequelize");
 // const {ProductsToOrders}=require('.');
 module.exports = (sequelize, DataTypes) => {
-  class products extends Model {
-    static associate(models) {
+  class Products extends Model {
+    static associate({Category,Order,User,ProductsToOrders,UsersToProducts}) {
       // define association here
-      products.belongsTo(models.Category, {
+      Products.belongsTo(Category, {
         targetKey: "name",
         foreignKey: "categories",
       });
-      products.belongsToMany(models.Order, {
-        through: models.ProductsToOrders,
+      Products.belongsToMany(Order, {
+        through: ProductsToOrders,
         foreignKey: "product_id",
       });
-      products.belongsToMany(models.User,{
-        through:models.UsersToProducts,
+      Products.hasMany(User,{
+        through:UsersToProducts,
         foreignKey:"product_id",
-      })
+      });
     }
   }
-  products.init(
+  Products.init(
     {
       name: {
         type: DataTypes.STRING(32),
@@ -44,8 +44,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "products",
+      modelName: "Products",
+      tableName:"products"
     }
   );
-  return products;
+  return Products;
 };

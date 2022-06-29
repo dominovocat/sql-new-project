@@ -47,15 +47,15 @@ module.exports = {
 
     await queryInterface.addConstraint('orders', {
       type: 'CHECK',
-      fields: ['phone'],
+      fields: ['phones'],
       where: {
-        phone: {
+        phones: {
           [Sequelize.Op.regexp]: '^[0-9]{11,11}$',
         }
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Orders");
+    await queryInterface.dropTable("orders");
   },
 };
