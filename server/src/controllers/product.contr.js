@@ -1,74 +1,74 @@
-const createHttpError = require("http-errors");
-const { Product } = require("../models");
-const { findSingleCategory } = require("./category.service");
+const {
+  findProductById,
+  findProductList,
+  createProduct,
+  updateProductById,
+  deleteProductById,
+} = require("../services/product.service");
 
-class ProductService {
-  createProduct = async (data) => {
-    const foundCat = await findSingleCategory({ name: data.category });
+class ProductController {
+  createProduct = async (req, res, next) => {
+    try {
+      const data = req.body;
 
-    if (!foundCat) {
-      throw createHttpError(404, 'Category not found');
+      const createdProduct = await createProduct(data);
+
+      res.status(200).send({ data: createdProduct });
+    } catch (error) {
+      next(error);
     }
-
-    const newProduct = await Product.create(data);
-
-    return newProduct;
   };
 
-  findProductList = async (limit, page) => {
-    const foundProducts = await Product.findAll({
-      limit: limit,
-      offset: (page - 1) * limit,
-    });
+  updateProduct = async (req, res, next) => {
+    try {
+      const data = req.body;
+      const id = req.params.id;
 
-    return foundProducts;
+      const updatedProduct = await updateProductById(id, data);
+
+      res.status(200).send({ data: updatedProduct });
+    } catch (error) {
+      next(error);
+    }
   };
 
-  findProductById = async (catId) => {
-    const product = await Product.findByPk(catId);
+  deleteProduct = async (req, res, next) => {
+    try {
+      const id = req.params.id;
 
-    if (!product) {
-      throw createHttpError(404, "Product not found");
+      const deletedProduct = await deleteProductById(id);
+
+      res.status(200).send({ data: deletedProduct });
+    } catch (error) {
+      next(error);
     }
-
-    return product;
   };
 
-  findSingleProduct = async (whereCriteria) => {
-    const product = await Product.findOne({ where: whereCriteria });
+  getProductById = async (req, res, next) => {
+    try {
+      const id = Number(req.params.id);
 
-    if (!product) {
-      throw createHttpError(404, "Product not found");
+      const foundProduct = await findProductById(id);
+
+      res.status(200).send({ data: foundProduct });
+    } catch (error) {
+      next(error);
     }
-
-    return product;
   };
 
-  updateProductById = async (id, data) => {
-    const [count] = await Product.update(data, {
-      where: {
-        id,
-      },
-    });
-    if (count === 0) {
-      throw createHttpError(404, "Product not found");
+  getProductList = async (req, res, next) => {
+    try {
+      // ?page=1&limit=10
+      const page = req.query.page || 1;
+      const limit = req.query.limit || 10;
+
+      const productList = await findProductList(limit, page);
+
+      res.status(200).send({ data: productList });
+    } catch (error) {
+      next(error);
     }
-
-    const updatedProduct = await this.findProductById(id);
-
-    return updatedProduct;
-  };
-
-  deleteProductById = async (id) => {
-    const deletedProduct = await this.findProductById(id);
-    if (!deletedProduct) {
-      throw createHttpError(404, "Product not found");
-    }
-
-    await Category.destroy({ where: { id } });
-
-    return deletedProduct;
   };
 }
 
-module.exports = new ProductService();
+module.exports = new ProductController();
