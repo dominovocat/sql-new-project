@@ -21,7 +21,7 @@ module.exports = {
           brand: "White Card",
           price: 20.3,
           amount: 20,
-          categories: "Junk",
+          categories: "junk",
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         },

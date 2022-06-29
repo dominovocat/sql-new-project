@@ -7,3 +7,7 @@ CREATE TABLE users(
   dob DATE NOT NULL,
   height DECIMAL(3, 2) NOT NULL 
 )
+
+--@block
+DELETE FROM "SequelizeMeta"
+WHERE name = '20220624130132-create-user.js'
