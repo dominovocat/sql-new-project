@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         through: ProductsToOrders,
         foreignKey: "product_id",
       });
-      Products.hasMany(User,{
-        through:UsersToProducts,
+      Products.belongsToMany(User,{
+        through:'UsersToProducts',
         foreignKey:"product_id",
       });
     }

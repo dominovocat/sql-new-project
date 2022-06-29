@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         as: "orders",
       });
       User.hasOne(models.BankCard, { foreignKey: "userId", as: "bankCard" });
-      User.hasMany(models.Products, {
-        through: models.UsersToProducts,
+      User.belongsToMany(models.Products, {
+        through: 'UsersToProducts',
         foreignKey: "user_id",
       });
     }
