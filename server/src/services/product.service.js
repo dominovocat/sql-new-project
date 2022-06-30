@@ -15,14 +15,6 @@ class ProductService {
     return newProduct;
   };
 
-  // findProductList = async (limit, page) => {
-  //   const foundProducts = await Product.findAll({
-  //     limit: limit,
-  //     offset: (page - 1) * limit,
-  //   });
-
-  //   return foundProducts;
-  // };
   findProductList = async (limit, page) => {
     const foundProducts = await Products.findAll({
       limit: limit,
