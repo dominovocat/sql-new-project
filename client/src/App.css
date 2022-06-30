@@ -3,7 +3,15 @@
   margin: 0px;
   padding: 0px;
 }
-
+.bugButton{
+  margin: 10px;
+}
+.ulList{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+}
 .list {
   display: flex;
   justify-content: space-around;

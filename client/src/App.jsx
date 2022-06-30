@@ -39,12 +39,12 @@ function App() {
   return (
     <div className="App">
       <header>
-        <div>Mini-Rozetka</div>
+        <h1 className="CommandName">Mini-Rozetka</h1>
         <nav></nav>
         <div>
           <div>Корзина ({cart.length})</div>
 
-          <button
+          <button className="bugButton"
             onClick={() => {
               // createOrderFromCart(cart); // POST /api/orders
             }}
@@ -57,7 +57,7 @@ function App() {
       <main>
         <section>
           <h2>Список категорий</h2>
-          <ul>
+          <ul className="ulList">
             {categList.map((c) => (
               <li key={c.id}>{c.name}</li>
             ))}
