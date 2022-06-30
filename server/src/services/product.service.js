@@ -1,5 +1,5 @@
 const createHttpError = require("http-errors");
-const { Product } = require("../db/models");
+const { Products } = require("../db/models");
 const { findSingleCategory } = require("./category.service");
 
 class ProductService {
@@ -10,13 +10,21 @@ class ProductService {
       throw createHttpError(404, 'Category not found');
     }
 
-    const newProduct = await Product.create(data);
+    const newProduct = await Products.create(data);
 
     return newProduct;
   };
 
+  // findProductList = async (limit, page) => {
+  //   const foundProducts = await Product.findAll({
+  //     limit: limit,
+  //     offset: (page - 1) * limit,
+  //   });
+
+  //   return foundProducts;
+  // };
   findProductList = async (limit, page) => {
-    const foundProducts = await Product.findAll({
+    const foundProducts = await Products.findAll({
       limit: limit,
       offset: (page - 1) * limit,
     });
@@ -25,7 +33,7 @@ class ProductService {
   };
 
   findProductById = async (catId) => {
-    const product = await Product.findByPk(catId);
+    const product = await Products.findByPk(catId);
 
     if (!product) {
       throw createHttpError(404, "Product not found");
@@ -35,7 +43,7 @@ class ProductService {
   };
 
   findSingleProduct = async (whereCriteria) => {
-    const product = await Product.findOne({ where: whereCriteria });
+    const product = await Products.findOne({ where: whereCriteria });
 
     if (!product) {
       throw createHttpError(404, "Product not found");
@@ -45,7 +53,7 @@ class ProductService {
   };
 
   updateProductById = async (id, data) => {
-    const [count] = await Product.update(data, {
+    const [count] = await Products.update(data, {
       where: {
         id,
       },
